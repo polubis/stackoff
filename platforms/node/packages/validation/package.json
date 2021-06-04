@@ -1,0 +1,15 @@
+{
+  "name": "@stackoff/validation",
+  "version": "0.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "private": true,
+  "typings": "build/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
