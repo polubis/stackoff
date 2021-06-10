@@ -1,5 +1,5 @@
 import React from "react"
 
-export default function (): React.ReactElement {
+export default (): React.ReactElement => {
   return <div>siema</div>
 }
