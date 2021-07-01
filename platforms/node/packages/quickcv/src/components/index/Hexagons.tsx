@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useRef, useState, useEffect } from "react"
 import styled from "styled-components"
 
 import { THEME } from "../../styles"
+import { useWindowResize } from "../../utils"
 
 const ITEM_SIZE = 56
 const ADDITIONAL_ROWS = 1
@@ -123,15 +124,6 @@ const createPositions = (
   return positions
 }
 
-const debounce = (callback, wait) => {
-  let timeout = null
-  return (...args) => {
-    const next = () => callback(...args)
-    clearTimeout(timeout)
-    timeout = setTimeout(next, wait)
-  }
-}
-
 const Hexagons: FC<Hexagons.Props> = ({
   children,
   itemSize,
@@ -180,17 +172,7 @@ const Hexagons: FC<Hexagons.Props> = ({
     }
   }, [])
 
-  useEffect(() => {
-    const handleResize = debounce(() => {
-      handleSetData()
-    }, 250)
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
+  useWindowResize(handleSetData)
 
   const renderChildren = () => {
     if (!data) {

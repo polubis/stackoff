@@ -8,6 +8,7 @@ require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` })
 module.exports = {
   /* Your site config here */
   plugins: [
+    'gatsby-plugin-sass',
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {

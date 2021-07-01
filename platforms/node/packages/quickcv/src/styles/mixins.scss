@@ -1,0 +1,44 @@
+@import "./theme.scss";
+
+@mixin circle($height, $width) {
+  border-radius: 50%;
+  height: $height;
+  width: $width;
+}
+
+@mixin absolute($top, $right, $bottom, $left) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin fixed($top, $right, $bottom, $left) {
+  position: fixed;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin col() {
+  display: flex;
+  flex-flow: column;
+}
+
+@mixin row() {
+  display: flex;
+}
+
+@mixin centerXY {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin separator($height, $width) {
+  height: $height;
+  width: $width;
+  background: $dark;
+}

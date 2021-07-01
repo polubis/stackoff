@@ -2,8 +2,8 @@ import React, { FC, Fragment } from "react"
 
 import { Education } from "./models"
 import { Space, Dots, Dot, Divider } from "../../ui"
-import styled, { css } from "styled-components"
-import { THEME } from "../../styles"
+import { Bumbo, Laro, Roso, Vigo } from "../../ui/typography"
+import styled from "styled-components"
 
 namespace EducationList {
   export interface Props {
@@ -36,49 +36,14 @@ const EDUCATION_ITEM_CONTENT_OFFSET_X = 42
 const EducationItemDetails = styled.div`
   width: 220px;
   position: absolute;
-  top: -35px;
+  top: -38px;
   display: flex;
   flex-flow: column;
   transform: ${() => `translateX(${EDUCATION_ITEM_CONTENT_OFFSET_X}px)`};
 `
 
-const slicedText = css`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-`
-
-const SchoolText = styled.b`
-  ${slicedText}
-  font-size: 18px;
-  font-weight: normal;
-  color: ${THEME.gray};
-`
-
-const TitleText = styled.span`
-  ${slicedText}
-  font-size: 24px;
-  font-weight: lighter;
-  color: ${THEME.black};
-  margin: 4px 0 8px 0;
-`
-
-const PathText = styled.span`
-  ${slicedText}
-  font-size: 18px;
-  color: ${THEME.black};
-  font-weight: lighter;
-`
-
-const EducationDate = styled.span`
-  ${slicedText}
-  font-size: 16px;
-  font-weight: lighter;
-`
-
 const EducationDates = styled.div`
-  top: -17px;
+  top: -20px;
   position: absolute;
   width: 220px;
   display: flex;
@@ -86,12 +51,6 @@ const EducationDates = styled.div`
   transform: ${() => `translateX(-100%)`};
   align-items: flex-end;
   padding-right: 34px;
-
-  ${EducationDate} {
-    &:first-of-type {
-      margin-bottom: 10px;
-    }
-  }
 `
 
 const EducationList: FC<EducationList.Props> = ({ education }) => {
@@ -106,17 +65,23 @@ const EducationList: FC<EducationList.Props> = ({ education }) => {
                 <Divider />
               </Dot>
               <EducationDates>
-                <EducationDate title={item.from.toLocaleDateString()}>
-                  {item.from.toLocaleDateString()}
-                </EducationDate>
-                <EducationDate title={item.to.toLocaleDateString()}>
+                <Space t={0} b={2}>
+                  <Roso title={item.from.toLocaleDateString()}>
+                    {item.from.toLocaleDateString()}
+                  </Roso>
+                </Space>
+                <Roso title={item.to.toLocaleDateString()}>
                   {item.to.toLocaleDateString()}
-                </EducationDate>
+                </Roso>
               </EducationDates>
               <EducationItemDetails>
-                <SchoolText title={item.school}>{item.school}</SchoolText>
-                <TitleText title={item.title}>{item.title}</TitleText>
-                <PathText title={item.path}>{item.path}</PathText>
+                <Vigo title={item.school} slice>
+                  {item.school}
+                </Vigo>
+                <Space t={4} b={8}>
+                  <Bumbo title={item.title}>{item.title}</Bumbo>
+                </Space>
+                <Laro title={item.path}>{item.path}</Laro>
               </EducationItemDetails>
             </EducationItem>
           </Space>

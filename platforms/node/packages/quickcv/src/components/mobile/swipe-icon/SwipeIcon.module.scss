@@ -1,0 +1,76 @@
+@import "../../../styles/animations.scss";
+@import "../../../styles/theme.scss";
+@import "../../../styles/mixins.scss";
+
+$shadowLight: #c3c3c3;
+$shadowDark: #ff7777;
+
+.shadow {
+  fill: $shadowLight;
+}
+
+@mixin animateTouch() {
+  animation: animate-touch 1.5s cubic-bezier(0.33, 0.87, 0, 0.74) forwards;
+
+  @keyframes animate-touch {
+    0% {
+      opacity: 0;
+      fill: $shadowLight;
+    }
+    78% {
+      opacity: 1;
+      fill: $shadowLight;
+    }
+    100% {
+      fill: $shadowDark;
+      opacity: 0;
+    }
+  }
+}
+
+@mixin animateHand {
+  animation: animate-hand 5s cubic-bezier(0.33, 0.87, 0, 0.74) forwards;
+  transform-origin: center center;
+
+  @keyframes animate-hand {
+    0% {
+      transform: translateY(0) rotate(10deg);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+    }
+    30% {
+      transform: translateY(-60px);
+      opacity: 1;
+    }
+    40% {
+      transform: translateY(-60px) rotate(15deg);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(30px, -60px) rotate(15deg);
+      opacity: 1;
+    }
+    60% {
+      transform: translateY(-60px) rotate(15deg);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+      transform: translateY(-60px) rotate(15deg);
+    }
+  }
+}
+
+.animated {
+  .hand {
+    @include animateHand();
+  }
+
+  .touchPlace {
+    @include animateTouch();
+  }
+}

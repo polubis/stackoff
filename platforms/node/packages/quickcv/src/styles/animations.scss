@@ -1,0 +1,15 @@
+@mixin opacityIn($delay: 0s) {
+  animation: opacity-in 0.7s cubic-bezier(0.33, 0.87, 0, 0.74) $delay forwards;
+  opacity: 0;
+  will-change: opacity;
+
+  @keyframes opacity-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+

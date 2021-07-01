@@ -1,0 +1,251 @@
+@import "../../../styles/animations.scss";
+@import "../../../styles/theme.scss";
+@import "../../../styles/mixins.scss";
+
+$header: 20vh;
+$headerBottomMargin: 23%;
+$avatarSize: 26%;
+$avatarBorderSize: 33%;
+$welcomeZIndex: 1;
+$swipeIconZIndex: 2;
+
+@mixin animateThumbnail($delay) {
+  animation: strech-down 1.4s cubic-bezier(0.76, 0.4, 0.64, 0.97) $delay
+    forwards;
+  will-change: height;
+  height: 100vh;
+
+  &::before {
+    content: "";
+    @include absolute(0, 0, 0, 0);
+    background: rgba($dark, 0.3);
+  }
+
+  @keyframes strech-down {
+    from {
+      height: 100vh;
+    }
+
+    to {
+      height: 100%;
+    }
+  }
+}
+
+@mixin centeredCircle($size) {
+  @include circle(0, $size);
+  @include absolute("unset", 0, "unset", 0);
+  margin: 0 auto;
+  padding: $size 0 0;
+  overflow: hidden;
+}
+
+@mixin animateWelcomeText($delay) {
+  animation: animate-welcome-text 3s cubic-bezier(0.5, 0.42, 1, 0.54) $delay
+    forwards;
+  opacity: 0;
+  will-change: opacity;
+
+  @keyframes animate-welcome-text {
+    0% {
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 0;
+    }
+
+    100% {
+      display: none;
+    }
+  }
+}
+
+@mixin animateIntro($thumbnailDelay) {
+  .header {
+    @include opacityIn(0.3s);
+  }
+
+  .welcome {
+    & > h1,
+    & > p {
+      @include animateWelcomeText(4.3s);
+    }
+  }
+
+  .thumbnail {
+    @include animateThumbnail($thumbnailDelay);
+  }
+
+  .avatar,
+  .avatarBorder {
+    @include opacityIn($thumbnailDelay + 1s);
+  }
+
+  .username {
+    @include opacityIn($thumbnailDelay + 1.3s);
+  }
+
+  .role {
+    @include opacityIn($thumbnailDelay + 1.6s);
+  }
+
+  .separator {
+    @include opacityIn($thumbnailDelay + 1.9s);
+  }
+
+  .description {
+    @include opacityIn($thumbnailDelay + 2.2s);
+  }
+
+  .languages {
+    @include opacityIn($thumbnailDelay + 2.5s);
+  }
+
+  .actions {
+    @include opacityIn($thumbnailDelay + 2.8s);
+  }
+}
+
+.intro {
+  @include col;
+  @include animateIntro(7s);
+  min-height: 100vh;
+
+  .swipeIcon {
+    @include fixed(0, 0, 0, 0);
+    margin: auto;
+    z-index: $swipeIconZIndex;
+
+    * > {
+      animation-delay: 1s;
+    }
+  }
+
+  .welcome {
+    @include col;
+    @include fixed(0, 0, 0, 0);
+    justify-content: center;
+    align-items: center;
+    color: $light;
+    z-index: $welcomeZIndex;
+
+    & > p {
+      font-weight: bolder;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    & > h1 {
+      font-weight: lighter;
+      font-size: 2.4rem;
+    }
+
+    & > svg {
+      position: absolute;
+      bottom: $mobileOffsetY;
+    }
+  }
+
+  .header {
+    position: relative;
+    height: $header;
+    margin-bottom: $headerBottomMargin;
+
+    .thumbnail {
+      @include absolute(0, 0, 0, 0);
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .avatarBorder,
+    .avatar {
+      box-shadow: $shadowThin;
+      opacity: 0;
+    }
+
+    .avatarBorder {
+      @include centeredCircle($avatarBorderSize);
+      background: $light;
+    }
+
+    .avatar {
+      @include centeredCircle($avatarSize);
+
+      img {
+        @include circle(100%, 100%);
+        @include absolute(0, "unset", "unset", 0);
+        object-fit: cover;
+      }
+    }
+  }
+
+  .personality {
+    @include col();
+    align-items: center;
+    padding: 0 $mobileOffsetX;
+    margin-bottom: 2.8rem;
+
+    .username {
+      font-weight: lighter;
+      font-size: 2.4rem;
+      margin: 0 0 1.6rem 0;
+    }
+
+    .role {
+      font-weight: lighter;
+      font-size: 1.6rem;
+
+      &:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .separator {
+      @include separator(1px, 17%);
+      margin: 2.8rem 0;
+    }
+
+    .description {
+      font-size: 1.6rem;
+      font-weight: lighter;
+      text-align: center;
+      line-height: 1.7;
+      max-width: 90%;
+    }
+  }
+
+  .languages {
+    @include centerXY;
+    margin: 0 0 2.8rem 0;
+
+    & > span {
+      font-size: 1.6rem;
+      font-weight: lighter;
+      margin: 0 0 0 1rem;
+    }
+  }
+
+  .actions {
+    @include centerXY;
+    margin-top: auto;
+    padding: 0.5rem 0;
+    background: #f2f2f2;
+
+    button {
+      @include centerXY;
+      padding: 1.2rem;
+      border: none;
+      background: none;
+    }
+  }
+}

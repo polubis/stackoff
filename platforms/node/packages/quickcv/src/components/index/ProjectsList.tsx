@@ -2,8 +2,8 @@ import React, { FC, Fragment } from "react"
 
 import { Project } from "./models"
 import { Space, Dots, Dot, Divider } from "../../ui"
-import styled, { css } from "styled-components"
-import { THEME } from "../../styles"
+import { Bumbo, Vigo, Roso, Laro } from "../../ui/typography"
+import styled from "styled-components"
 import Hexagons from "./Hexagons"
 
 namespace ProjectsList {
@@ -37,56 +37,14 @@ const PROJECT_ITEM_CONTENT_OFFSET_X = 42
 const ProjectItemDetails = styled.div`
   width: 220px;
   position: absolute;
-  top: -41px;
+  top: -37px;
   display: flex;
   flex-flow: column;
   transform: ${() => `translateX(${PROJECT_ITEM_CONTENT_OFFSET_X}px)`};
 `
 
-const slicedText = css`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-`
-
-const ProjectAreaText = styled.span`
-  ${slicedText}
-  font-size: 18px;
-  font-weight: normal;
-  color: ${THEME.gray};
-  margin: 2px 0 8px 0;
-`
-
-const ProjectNameText = styled.span`
-  ${slicedText}
-  cursor: pointer;
-  font-size: 24px;
-  font-weight: lighter;
-  margin-bottom: 14px;
-  color: ${THEME.black};
-`
-
-const ProjectDescriptionText = styled.span`
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: lighter;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  color: ${THEME.black};
-`
-
-const ProjectDate = styled.span`
-  ${slicedText}
-  font-size: 16px;
-  font-weight: lighter;
-`
-
 const ProjectDates = styled.div`
-  top: -17px;
+  top: -21px;
   position: absolute;
   width: 220px;
   display: flex;
@@ -94,12 +52,6 @@ const ProjectDates = styled.div`
   transform: ${() => `translateX(-100%)`};
   align-items: flex-end;
   padding-right: 34px;
-
-  ${ProjectDate} {
-    &:first-of-type {
-      margin-bottom: 10px;
-    }
-  }
 `
 
 const TechnologyIconWrapper = styled.figure`
@@ -133,23 +85,23 @@ const ProjectsList: FC<ProjectsList.Props> = ({ projects }) => {
                 <Divider />
               </Dot>
               <ProjectDates>
-                <ProjectDate title={project.from.toLocaleDateString()}>
-                  {project.from.toLocaleDateString()}
-                </ProjectDate>
-                <ProjectDate title={project.to.toLocaleDateString()}>
+                <Space t={0} b={2}>
+                  <Roso title={project.from.toLocaleDateString()}>
+                    {project.from.toLocaleDateString()}
+                  </Roso>
+                </Space>
+                <Roso title={project.to.toLocaleDateString()}>
                   {project.to.toLocaleDateString()}
-                </ProjectDate>
+                </Roso>
               </ProjectDates>
               <ProjectItemDetails>
-                <ProjectAreaText title={project.area}>
-                  {project.area}
-                </ProjectAreaText>
-                <ProjectNameText title={project.name}>
-                  {project.name}
-                </ProjectNameText>
-                <ProjectDescriptionText>
-                  {project.description}
-                </ProjectDescriptionText>
+                <Vigo title={project.area}>{project.area}</Vigo>
+                <Space t={4} b={8}>
+                  <Bumbo title={project.name} slice>
+                    {project.name}
+                  </Bumbo>
+                </Space>
+                <Laro>{project.description}</Laro>
               </ProjectItemDetails>
             </ProjectItem>
           </Space>

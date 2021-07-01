@@ -2,6 +2,7 @@ import React, { FC, Fragment } from "react"
 
 import { Language } from "./models"
 import { Space, Dots, Dot, Divider } from "../../ui"
+import { Bumbo } from "../../ui/typography"
 import styled, { CSSProperties } from "styled-components"
 
 namespace LanguagesList {
@@ -23,44 +24,22 @@ const LanguageItem = styled.div`
   }
 `
 
-const BOTTOM_OFFSET = 9
-const LanguageItemLabel = styled.div`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  font-size: 22px;
-  bottom: -${BOTTOM_OFFSET}px;
-  width: max-content;
-  font-weight: lighter;
-`
-
 const isOdd = (value: number): boolean => value % 2 === 0
 
-const LABEL_OFFSET_X = 42
 const getLanguageItemLabelStyle = (index: number): CSSProperties => {
-  const labelOffsetX = LABEL_OFFSET_X + "px"
-
-  if (isOdd(index)) {
-    return {
-      left: labelOffsetX,
-    }
-  }
-
   return {
-    right: labelOffsetX,
+    display: "flex",
+    alignItems: "center",
+    position: "absolute",
+    bottom: "-11px",
+    width: "max-content",
+    [isOdd(index) ? "left" : "right"]: "42px",
   }
 }
 
-const DIVIDER_OFFSET_X = 18
 const getLanguageItemDotDividerStyle = (index: number): CSSProperties => {
-  if (isOdd(index)) {
-    return {
-      transform: `translateX(${DIVIDER_OFFSET_X}px)`,
-    }
-  }
-
   return {
-    transform: `translateX(-${DIVIDER_OFFSET_X}px)`,
+    transform: isOdd(index) ? `translateX(18px)` : `translateX(-18px)`,
   }
 }
 
@@ -74,9 +53,9 @@ const LanguagesList: FC<LanguagesList.Props> = ({ languages }) => {
               <Dot fill="black">
                 <Divider style={getLanguageItemDotDividerStyle(i)} />
               </Dot>
-              <LanguageItemLabel style={getLanguageItemLabelStyle(i)}>
+              <Bumbo style={getLanguageItemLabelStyle(i)}>
                 {language.name} ({language.level})
-              </LanguageItemLabel>
+              </Bumbo>
             </LanguageItem>
           </Space>
           <Space t={0} b={8}>

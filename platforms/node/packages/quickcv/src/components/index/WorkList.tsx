@@ -2,8 +2,8 @@ import React, { FC, Fragment } from "react"
 
 import { Work } from "./models"
 import { Space, Dots, Dot, Divider } from "../../ui"
-import styled, { css } from "styled-components"
-import { THEME } from "../../styles"
+import styled from "styled-components"
+import { Bumbo, Vigo, Roso } from "../../ui/typography"
 
 namespace WorkList {
   export interface Props {
@@ -36,42 +36,14 @@ const JOBS_ITEM_CONTENT_OFFSET_X = 42
 const WorkItemDetails = styled.div`
   width: 220px;
   position: absolute;
-  top: -28px;
+  top: -25px;
   display: flex;
   flex-flow: column;
   transform: ${() => `translateX(${JOBS_ITEM_CONTENT_OFFSET_X}px)`};
 `
 
-const slicedText = css`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-`
-
-const CompanyText = styled.span`
-  ${slicedText}
-  font-size: 24px;
-  font-weight: lighter;
-  color: ${THEME.black};
-  margin: 2px 0 8px 0;
-`
-
-const RoleText = styled.span`
-  ${slicedText}
-  font-size: 18px;
-  font-weight: lighter;
-  color: ${THEME.black};
-`
-
-const WorkDate = styled.span`
-  ${slicedText}
-  font-size: 16px;
-  font-weight: lighter;
-`
-
 const WorkDates = styled.div`
-  top: -17px;
+  top: -20px;
   position: absolute;
   width: 220px;
   display: flex;
@@ -79,12 +51,6 @@ const WorkDates = styled.div`
   transform: ${() => `translateX(-100%)`};
   align-items: flex-end;
   padding-right: 34px;
-
-  ${WorkDate} {
-    &:first-of-type {
-      margin-bottom: 10px;
-    }
-  }
 `
 
 const WorkList: FC<WorkList.Props> = ({ work }) => {
@@ -99,16 +65,18 @@ const WorkList: FC<WorkList.Props> = ({ work }) => {
                 <Divider />
               </Dot>
               <WorkDates>
-                <WorkDate title={job.from.toLocaleDateString()}>
+                <Roso title={job.from.toLocaleDateString()} slice>
                   {job.from.toLocaleDateString()}
-                </WorkDate>
-                <WorkDate title={job.to.toLocaleDateString()}>
+                </Roso>
+                <Roso title={job.to.toLocaleDateString()}>
                   {job.to.toLocaleDateString()}
-                </WorkDate>
+                </Roso>
               </WorkDates>
               <WorkItemDetails>
-                <CompanyText title={job.company}>{job.company}</CompanyText>
-                <RoleText>{job.roles.join(" & ")}</RoleText>
+                <Vigo slice>{job.roles.join(" & ")}</Vigo>
+                <Space t={8} b={0}>
+                  <Bumbo title={job.company}>{job.company}</Bumbo>
+                </Space>
               </WorkItemDetails>
             </WorkItem>
           </Space>
