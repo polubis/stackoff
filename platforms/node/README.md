@@ -78,27 +78,6 @@ repository for whole system but splitted in different packages.
 - Much easier to create conflicts.
 - Hard to setup CI & CD
 
-# Steps to reproduce
-
-0. Create 2 dirs. First will be **platforms** dir which indicates platform f.e .NET, node. Second will be our **node**`.
-1. Put `cd platforms/node` command to change directory
-2. Init **package.json** file via `npm init` command. I used **@stackoff/node** as name attribute to make it easier to distinguish.
-3. Next we need to install [Lerna](https://github.com/lerna/lerna) library. Tool which make monorepo easy to manage. Tracks dependecies between packages and runs dedicated commands in good order to avoid problems in build. So in CLI type `yarn add lerna -D`.
-4. Use `npx lerna init` to init lerna config file and creates **packages** directory.
-
-```json
-{
-  "packages": ["packages/*"],
-  "version": "0.0.0"
-}
-```
-
-We can add more **packages** dirs like f.e **libs** which can contain only pure js/ts libraries but i prefer single directory. **nx** tool from **nrwl** team uses this approach. In catalog **apps** we have applications but in **libs** libraries code.
-
-5. I added new directory manually **environment** where we will add configuration / build things like **tsconfig.json** file or base **webpack** configurations and etc...
-6. There is a option to make single configuration for linter, formattedr and etc... to whole project. But this is problematic. In real world example some **packages** will have other configuration rules so single config will be problematic.
-7. We are ready to go. Right now we can create folders and put our projects inside. Just important thing - every project should share same commands patterns. For example to run packages in development mode all package should have `npm start` script. Ofcourse libraries packagaes will have only `build` commands.
-
 # Lerna tips
 
 - Working with **lerna** is pretty simple. But remember to add every dependency via dedicated **lerna** command - `lerna add`.

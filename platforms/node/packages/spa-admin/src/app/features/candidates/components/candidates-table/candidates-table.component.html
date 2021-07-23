@@ -1,0 +1,136 @@
+<h1>List of candidates</h1>
+<div class="add-candidate">
+  <button
+    id="add-button"
+    mat-fab
+    color="primary"
+    aria-label="Fab button with a add icon"
+    (click)="addClicked.emit()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="md-form">
+  <input type="search" placeholder="Search" />
+</div>
+
+<div class="mat-elevation-z8">
+  <mat-table matSort aria-label="Elements" [dataSource]="candidates">
+    <!-- Name Column -->
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.firstName }}</mat-cell>
+    </ng-container>
+
+    <!-- Surname Column -->
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef>Surname</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.lastName }}</mat-cell>
+    </ng-container>
+
+    <!-- PhoneNumber Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef>Phone number</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{
+        candidate.phoneNumber
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.email }}</mat-cell>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef>Position</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.position }}</mat-cell>
+    </ng-container>
+
+    <!-- Wage Column -->
+    <ng-container matColumnDef="wage">
+      <mat-header-cell *matHeaderCellDef>Wage</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.wage }} zł</mat-cell>
+    </ng-container>
+
+    <!-- StartRecruitmentDay Column -->
+    <ng-container matColumnDef="startRecruitmentDate">
+      <mat-header-cell *matHeaderCellDef>StartRD</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{
+        candidate.startRecruitmentDate
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- EndRecruitmentDay Column -->
+    <ng-container matColumnDef="endRecruitmentDate">
+      <mat-header-cell *matHeaderCellDef>EndRD</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{
+        candidate.endRecruitmentDate
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- CV Column -->
+    <ng-container matColumnDef="cvUrl">
+      <mat-header-cell *matHeaderCellDef>Cv</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{ candidate.cvUrl }}</mat-cell>
+    </ng-container>
+
+    <!-- Recommendation Column -->
+    <ng-container matColumnDef="recommendationUrl">
+      <mat-header-cell *matHeaderCellDef>Recommendation</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">{{
+        candidate.recommendationUrl
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Accept Button Column -->
+    <ng-container matColumnDef="accept">
+      <mat-header-cell *matHeaderCellDef>Accept</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="acceptClicked.emit(row.id)"
+        >
+          Accept
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Edit Button Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button id="edit-button" mat-raised-button color="accent">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Reject Button Column -->
+    <ng-container matColumnDef="reject">
+      <mat-header-cell *matHeaderCellDef>Reject</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">
+        <button
+          id="reject-button"
+          mat-raised-button
+          color="warn"
+          (click)="rejectClicked.emit(candidate.id)"
+        >
+          Reject
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    #paginator
+    [length]="candidates.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 50, 100, 250]"
+  >
+  </mat-paginator>
+</div>

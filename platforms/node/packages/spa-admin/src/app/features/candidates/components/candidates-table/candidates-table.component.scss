@@ -1,0 +1,58 @@
+.add-candidate {
+  float: right;
+  size: 15px;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-column-firstName,
+.mat-column-lastName,
+.mat-column-phoneNumber,
+.mat-column-accept,
+.mat-column-edit,
+.mat-column-reject,
+.mat-column-cvUrl,
+.mat-column-startRecruitmentDate,
+.mat-column-endRecruitmentDate {
+  flex: 0 0 10% !important;
+  width: 10% !important;
+}
+
+.mat-column-position,
+.mat-column-recommendationUrl {
+  flex: 0 0 12% !important;
+  width: 12% !important;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+}
+
+.mat-column-email {
+  flex: 0 0 20% !important;
+  width: 20% !important;
+}
+
+.mat-column-wage {
+  flex: 0 0 8% !important;
+  width: 8% !important;
+}

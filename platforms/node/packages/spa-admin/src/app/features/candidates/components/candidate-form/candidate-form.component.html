@@ -1,0 +1,57 @@
+<ng-container *ngIf="pending">Saving data into server...</ng-container>
+
+<form [formGroup]="form" class="normal-form" (ngSubmit)="submit.emit()">
+  <div class="controles-container">
+    <mat-form-field>
+      <input formControlName="firstName" matInput placeholder="First Name *" />
+      <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="lastName" matInput placeholder="Last Name *" />
+      <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        formControlName="phoneNumber"
+        matInput
+        placeholder="Phone Number *"
+      />
+      <mat-error *ngIf="form.controls['phoneNumber'].errors?.required"
+        >This field is mandatory.</mat-error
+      >
+      <mat-error *ngIf="form.controls['phoneNumber'].errors?.minlength"
+        >Minimum 9 charactors needed.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="email" matInput placeholder="Email" />
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="position" matInput placeholder="Position" />
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="wage" matInput placeholder="Wage" />
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="cvUrl" matInput placeholder="Cv" />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        formControlName="recommendationUrl"
+        matInput
+        placeholder="Recommendation"
+      />
+    </mat-form-field>
+    <ng-content></ng-content>
+  </div>
+  <button
+    id="submit"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="form.pristine || form.invalid || pending"
+  >
+    Submit
+  </button>
+  <button mat-raised-button color="warn" [disabled]="pending">Clear</button>
+</form>

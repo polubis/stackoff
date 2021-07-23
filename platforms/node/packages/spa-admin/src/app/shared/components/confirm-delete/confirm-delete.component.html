@@ -1,0 +1,25 @@
+<h1>{{ title }}</h1>
+<span>{{ description }}</span>
+
+<ng-container *ngIf="pending">Pending...</ng-container>
+
+<footer style="display: flex">
+  <button
+    id="submit"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="pending"
+    (click)="cancel.emit()"
+  >
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    [disabled]="pending"
+    (click)="confirm.emit()"
+  >
+    Confirm
+  </button>
+</footer>

@@ -1,25 +1,25 @@
-// @import "../../../styles/animations.scss";
-// @import "../../../styles/theme.scss";
 @import "../../../styles/mixins.scss";
 
 .swipper {
+  @include grab;
   position: relative;
-  background: red;
   min-width: 200px;
   min-height: 200px;
   overflow: hidden;
 
   .container {
     @include row;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    @include absolute();
+    transition: 0.3s transform;
 
     & > * {
-      background: blue;
       flex-shrink: 0;
+    }
+  }
+
+  .unselectable {
+    & > * {
+      @include unselectable;
     }
   }
 }

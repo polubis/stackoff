@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 
-import { min } from "@stackoff/validation";
-
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -9,6 +7,5 @@ import { min } from "@stackoff/validation";
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
-    console.log(min(2)(2));
   }
 }
